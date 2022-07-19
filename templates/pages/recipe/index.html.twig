@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	SymRecipe - Mes recettes
+{% endblock %}
+{% block body %}
+	<div class="container mt-4">
+		{% if not recipes.items is same as([]) %}
+			<h1>
+				Mes recettes
+			</h1>
+			<a href="{{ path('recipe.new') }}" class="btn btn-primary">Créer une recette</a>
+
+			{# On affiche un message flash #}
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-4">
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			<div class="count mt-4">
+				<span class="badge bg-info">
+					Il y a
+					{{ recipes.getTotalItemCount }}
+					recettes
+				</span>
+			</div>
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Numéro ID</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Prix</th>
+						<th scope="col">Difficulté</th>
+						<th scope="col">Date de création</th>
+						<th scope="col">Edition</th>
+						<th scope="col">Suppresion</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for recipe in recipes %}
+						<tr class="table-primary">
+							<th scope="row">{{ recipe.id }}</th>
+							<td>{{ recipe.name }}</td>
+							<td>{{ (recipe.price is null) ? 'NC' : recipe.price }}</td>
+							<td>{{ (recipe.difficulty is null) ? 'NC' : recipe.difficulty }}</td>
+							<td>{{ recipe.createdAt|date('d/m/Y') }}</td>
+							<td>
+								<a href="{{ path('recipe.edit', {'id': recipe.id}) }}" class="btn btn-info">Editer</a>
+							</td>
+							<td>
+								<a href="{{ path('recipe.delete', {'id': recipe.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer {{recipe.name}}?')" class="btn btn-danger">Supprimer</a>
+							</td>
+
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="navigation d-flex justify-content-center mt-4">
+				{{ knp_pagination_render(recipes) }}
+			</div>
+		{% else %}
+			<h2>Il n'y a pas de recettes</h2>
+		{% endif %}
+	</div>
+{% endblock %}

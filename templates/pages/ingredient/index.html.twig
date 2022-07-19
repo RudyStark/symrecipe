@@ -4,7 +4,7 @@
 {% endblock %}
 {% block body %}
 	<div class="container mt-4">
-		{% if ingredients.items is not same as([]) %}
+		{% if not ingredients.items is same as([]) %}
 			<h1>
 				Mes ingrédients
 			</h1>
