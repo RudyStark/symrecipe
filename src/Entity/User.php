@@ -34,14 +34,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $email;
 
     #[ORM\Column(type: 'json')]
-    #[Assert\NotBlank()]
+    #[Assert\NotNull()]
     private array $roles = [];
 
     private ?string $plainPassword = null;
 
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank()]
-    private string $password;
+    private string $password = 'password';
 
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NotNull()]
