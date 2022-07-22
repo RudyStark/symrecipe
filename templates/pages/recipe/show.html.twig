@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	SymRecipe -
+	{{ recipe.name }}
+{% endblock %}
+
+{% block body %}
+	<div
+		class="container">
+		{# Card #}
+		<div class="card mb-3 border-primary mt-4">
+			<h3 class="card-header text-center">{{ recipe.name }}</h3>
+			<div class="card-body">
+				<span class="badge bg-primary">Créée le
+					{{ recipe.createdAt|date('d/m/Y') }}</span>
+			</div>
+			<svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveaspectratio="xMidYMid slice" viewbox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+				<rect width="100%" height="100%" fill="#868e96"></rect>
+				<text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+			</svg>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					{% if recipe.time %}
+						<p>Temps (en minute) :
+							{{ recipe.time }}</p>
+					{% else %}
+						<p>Temps (en minute) : Non renseigné</p>
+					{% endif %}
+				</li>
+				<li class="list-group-item">
+					{% if recipe.nbPeople %}
+						<p>Pour
+							{{ recipe.nbPeople }}
+							personnes</p>
+					{% else %}
+						<p>Nombre de personne non renseigné</p>
+					{% endif %}
+				</li>
+				<li class="list-group-item">
+					{% if recipe.difficulty %}
+						<p>Difficulté :
+							{{ recipe.difficulty }}/5</p>
+					{% else %}
+						<p>Difficulté : Non renseigné</p>
+					{% endif %}
+				</li>
+				<li class="list-group-item">
+					{% if recipe.price %}
+						<p>Prix (en €) :
+							{{ recipe.price }}</p>
+					{% else %}
+						<p>Prix (en €) : Non renseigné</p>
+					{% endif %}
+				</li>
+			</ul>
+			<div class="card-body">
+				{{ recipe.description|raw }}
+			</div>
+			<div class="card-header text-black">Ingrédients:</div>
+			<div class="card-body">
+				{% for ingredient in recipe.ingredients %}
+					<span class="badge bg-info">{{ ingredient.name }}</span>
+				{% endfor %}
+			</div>
+			<div class="card-footer text-center text-muted">
+				<a href="#" class="card-link">
+					<i class="fa-brands fa-twitter fa-2x"></i>
+				</a>
+				<a href="#" class="card-link">
+					<i class="fa-brands fa-facebook fa-2x"></i>
+				</a>
+				<a href="#" class="card-link">
+					<i class="fa-brands fa-google-plus fa-2x"></i>
+				</a>
+				<a href="#" class="card-link">
+					<i class="fa-brands fa-whatsapp fa-2x"></i>
+				</a>
+				<a href="#" class="card-link">
+					<i class="fa-brands fa-discord fa-2x"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}
