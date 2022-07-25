@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+
 class IngredientController extends AbstractController
 {
     /**
@@ -45,7 +46,7 @@ class IngredientController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    #[Route('/ingredient/nouveau', name: 'ingredient.new', methods: ['GET', 'POST'])]
+    #[Route('/ingredient/creation', name: 'ingredient.new', methods: ['GET', 'POST'])]
     #[IsGranted("ROLE_USER")]
     public function new(
         Request $request,
@@ -111,6 +112,7 @@ class IngredientController extends AbstractController
      * @return Response
      */
     #[Route('/ingredient/suppression/{id}', name: 'ingredient.delete', methods: ['GET'])]
+    #[Security("is_granted('ROLE_USER') and user === ingredient.getUser()")]
     public function delete(Ingredient $ingredient, EntityManagerInterface $manager): Response
     {
 

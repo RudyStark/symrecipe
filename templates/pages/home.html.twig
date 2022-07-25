@@ -24,8 +24,8 @@
 						<div class="card-body">
 							<h4 class="card-title">{{ recipe.name }}</h4>
 							<p class="card-text">{{ recipe.description|slice(0,100) ~ '...' }}</p>
-							<div
-								class="text-center">{# <a href="{{ path('recipe.show', { id: app.recipe.id }) }}" class="btn btn-primary btn-sm">Voir la recette</a> #}
+							<div class="text-center">
+								<a href="{{ path('recipe.show', { id: recipe.id }) }}" class="btn btn-primary btn-sm">Voir la recette</a>
 							</div>
 						</div>
 					</div>
